@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -77,6 +78,12 @@ func LoadYamlConfig(filename string, env string) []string {
 	if app.CurrentEnvironment.Host == "" {
 		app.CurrentEnvironment.Host = "localhost"
 		app.CurrentEnvironment.Port = "4100"
+	}
+
+	// use env variable instead
+	h := os.Getenv("SQS_HOST")
+	if h != "" {
+		app.CurrentEnvironment.Host = h
 	}
 
 	app.SyncQueues.Lock()

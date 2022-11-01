@@ -25,4 +25,9 @@ docker-release: linux
 	docker build -t pafortin/goaws .
 	docker tag pafortin/goaws pafortin/goaws:$(VERSION)
 
+release: linux
+	docker build -t veriks/goaws .
+	docker tag veriks/goaws veriks/goaws:$(VERSION)
+	docker push veriks/goaws:$(VERSION)
+
 
